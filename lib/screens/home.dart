@@ -93,7 +93,7 @@ class _HomeState extends State<Home> {
               },
               child: Container(
                 padding: EdgeInsets.symmetric(
-                    vertical: _heightOne * 5
+                  vertical: _heightOne * 5
                 ),
                 decoration: BoxDecoration(
                     color:  _currentIndex != 0  ? Colors.white :
@@ -123,7 +123,7 @@ class _HomeState extends State<Home> {
               },
               child: Container(
                 padding: EdgeInsets.symmetric(
-                  vertical: _heightOne * 5
+                    vertical: _heightOne * 5
                 ),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
