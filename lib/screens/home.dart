@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gallery/screens/tabs/apiImages.dart';
@@ -14,6 +16,7 @@ class _HomeState extends State<Home> {
   double _fontOne;
   double _iconOne;
   int _currentIndex = 0;
+  bool _rebuild = false;
   List<Widget> _tabBody = [
     ApiImages(),
     LocalImages()
@@ -35,7 +38,16 @@ class _HomeState extends State<Home> {
                 Icons.refresh,
                 color: Colors.white,
               ),
-              onPressed: (){}
+              onPressed: (){
+                if(!_rebuild){
+                  _rebuild = true;
+                  setState(() {});
+                  Timer(Duration(seconds: 1), (){
+                    _rebuild = false;
+                    setState(() {});
+                  });
+                }
+              }
           )
         ],
       ),
@@ -44,7 +56,9 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             topButtons(),
-            Expanded(child: _tabBody[_currentIndex])
+            Expanded(
+                child: _rebuild ? Container() : _tabBody[_currentIndex]
+            )
           ],
         ),
       ),
@@ -69,7 +83,7 @@ class _HomeState extends State<Home> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: InkWell(
+            child: GestureDetector(
               onTap: (){
                 if(_currentIndex != 0){
                   setState(() {
@@ -99,7 +113,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           Expanded(
-            child: InkWell(
+            child: GestureDetector(
               onTap: (){
                 if(_currentIndex != 1){
                   setState(() {
